@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // ── Brand Colors (same as website) ──
   static const Color primary = Color(0xFF4F46E5);
   static const Color primary2 = Color(0xFF7C3AED);
   static const Color green = Color(0xFF16A34A);
@@ -34,7 +33,7 @@ class AppTheme {
         color: const Color(0xFF111111),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: Colors.white,
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -71,7 +70,7 @@ class AppTheme {
         color: Colors.white,
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: const Color(0xFF1A1A24),
       elevation: 0,
       shape: RoundedRectangleBorder(

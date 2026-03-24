@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.yashsoftware.quiztech"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.yashsoftware.quiztech"
-        minSdk = 21
-        targetSdk = 34
+        minSdk = 23
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0.0"
         multiDexEnabled = true

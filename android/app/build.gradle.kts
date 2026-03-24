@@ -1,41 +1,44 @@
-// android/app/build.gradle.kts (App-level)
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    // Google Services plugin — Firebase ke liye zaroori
     id("com.google.gms.google-services")
     id("dev.flutter.flutter-gradle-plugin")
 }
 
 android {
     namespace = "com.yashsoftware.quiztech"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.yashsoftware.quiztech"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0.0"
         multiDexEnabled = true
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
@@ -45,14 +48,9 @@ flutter {
 }
 
 dependencies {
-    // Firebase BoM — automatically compatible versions
     implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-
-    // Google Sign In
     implementation("com.google.android.gms:play-services-auth:21.0.0")
-
-    // MultiDex
     implementation("androidx.multidex:multidex:2.0.1")
 }

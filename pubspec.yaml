@@ -10,15 +10,15 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Firebase
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.16.0
-  cloud_firestore: ^4.15.5
-  google_sign_in: ^6.2.1
+  # Firebase - Updated to latest stable versions
+  firebase_core: ^4.6.0
+  firebase_auth: ^6.3.0
+  cloud_firestore: ^6.2.0
+  google_sign_in: ^7.2.0
 
   # UI
-  google_fonts: ^6.2.1
-  confetti: ^0.7.0
+  google_fonts: ^8.0.2
+  confetti: ^0.8.0
 
   # Storage
   shared_preferences: ^2.2.2

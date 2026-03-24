@@ -7,12 +7,12 @@ plugins {
 
 android {
     namespace = "com.yashsoftware.quiztech"
-    compileSdk = 36
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.yashsoftware.quiztech"
         minSdk = 21
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
         multiDexEnabled = true
@@ -48,9 +48,9 @@ flutter {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:34.11.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
     implementation("androidx.multidex:multidex:2.0.1")
 }

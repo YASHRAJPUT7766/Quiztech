@@ -9,7 +9,6 @@ class AuthService {
   Stream<User?> get userStream => _auth.authStateChanges();
   User? get currentUser => _auth.currentUser;
 
-  // ── Email/Password Login ──
   Future<UserCredential> signInWithEmail(String email, String password) async {
     return await _auth.signInWithEmailAndPassword(
       email: email,
@@ -17,7 +16,6 @@ class AuthService {
     );
   }
 
-  // ── Email/Password Register ──
   Future<UserCredential> registerWithEmail(
       String name, String email, String password) async {
     final cred = await _auth.createUserWithEmailAndPassword(
@@ -28,7 +26,6 @@ class AuthService {
     return cred;
   }
 
-  // ── Google Sign In ──
   Future<UserCredential?> signInWithGoogle() async {
     final googleUser = await _google.signIn();
     if (googleUser == null) return null;
@@ -38,17 +35,14 @@ class AuthService {
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
-    final cred = await _auth.signInWithCredential(credential);
-    return cred;
+    return await _auth.signInWithCredential(credential);
   }
 
-  // ── Sign Out ──
   Future<void> signOut() async {
     await _google.signOut();
     await _auth.signOut();
   }
 
-  // ── Generate referral code ──
   static String genRef(String uid) {
     const s = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
     var seed = uid.codeUnitAt(0) * 31 + uid.codeUnitAt(uid.length - 1);

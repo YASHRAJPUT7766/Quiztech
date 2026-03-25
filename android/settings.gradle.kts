@@ -1,24 +1,56 @@
-pluginManagement {
-    val flutterSdkPath = run {
-        val properties = java.util.Properties()
-        file("local.properties").inputStream().use { properties.load(it) }
-        val flutterSdkPath = properties.getProperty("flutter.sdk")
-        require(flutterSdkPath != null) { "flutter.sdk not set in local.properties" }
-        flutterSdkPath
-    }
-    includeBuild("$flutterSdkPath/packages/flutter_tools/gradle")
-    repositories {
-        google()
-        mavenCentral()
-        gradlePluginPortal()
-    }
-}
-
 plugins {
-    id("dev.flutter.flutter-plugin-loader") version "1.0.0"
-    id("com.android.application") version "8.7.0" apply false
-    id("org.jetbrains.kotlin.android") version "2.1.0" apply false
-    id("com.google.gms.google-services") version "4.4.2" apply false
+    id("com.android.application")
+    id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
+    id("dev.flutter.flutter-gradle-plugin")
 }
 
-include(":app")
+android {
+    namespace = "com.yashsoftware.quiztech"
+    compileSdk = 36
+
+    defaultConfig {
+        applicationId = "com.yashsoftware.quiztech"
+        minSdk = 23
+        targetSdk = 36
+        versionCode = 1
+        versionName = "1.0.0"
+        multiDexEnabled = true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = "17"
+    }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            isShrinkResources = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("androidx.multidex:multidex:2.0.1")
+}

@@ -7,24 +7,19 @@ plugins {
 
 android {
     namespace = "com.yashsoftware.quiztech"
-
-    // Flutter SDK se automatically pick hote hain compileSdk, ndkVersion etc.
-    compileSdk = flutter.compileSdkVersion
-    ndkVersion = flutter.ndkVersion
+    compileSdk = 34
+    ndkVersion = "27.0.12077973"
 
     defaultConfig {
         applicationId = "com.yashsoftware.quiztech"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-
-        // MultiDex enable - Firebase + Google Sign In ke liye zaroori
+        minSdk = 23
+        targetSdk = 34
+        versionCode = 1
+        versionName = "1.0.0"
         multiDexEnabled = true
     }
 
     compileOptions {
-        // Java 8+ features support karne ke liye (firebase needs it)
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -36,14 +31,12 @@ android {
 
     buildTypes {
         release {
-            // Minify & shrink OFF - safe build for Codemagic
             isMinifyEnabled = false
             isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            // Debug keystore use karo - release signing setup na ho tab bhi APK banega
             signingConfig = signingConfigs.getByName("debug")
         }
         debug {
@@ -52,7 +45,6 @@ android {
         }
     }
 
-    // Lint errors se build fail na ho
     lint {
         disable += "InvalidPackage"
         checkReleaseBuilds = false
@@ -65,17 +57,10 @@ flutter {
 }
 
 dependencies {
-    // Java 8+ desugaring - coreLibraryDesugaring ke saath zaroori
     coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
-
-    // Firebase BOM - sab Firebase libs ek saath version manage karti hai
     implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
-
-    // Google Sign-In
     implementation("com.google.android.gms:play-services-auth:21.3.0")
-
-    // MultiDex support
     implementation("androidx.multidex:multidex:2.0.1")
 }

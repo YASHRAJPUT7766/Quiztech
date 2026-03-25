@@ -1,0 +1,23 @@
+workflows:
+  android-debug:
+    name: Android Debug Build
+    max_build_duration: 60
+    environment:
+      flutter: 3.24.5
+      java: 17
+    scripts:
+      - name: Get Flutter packages
+        script: flutter pub get
+      - name: Build Android APK
+        script: |
+          flutter build apk --debug \
+            --android-skip-build-dependency-validation
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+    publishing:
+      email:
+        recipients:
+          - yashrajput7766@gmail.com
+        notify:
+          success: true
+          failure: true

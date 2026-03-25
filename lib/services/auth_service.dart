@@ -4,7 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthService {
   final _auth = FirebaseAuth.instance;
-  final _google = GoogleSignIn();
+  final _google = GoogleSignIn(scopes: ['email', 'profile']);
 
   Stream<User?> get userStream => _auth.authStateChanges();
   User? get currentUser => _auth.currentUser;
@@ -25,7 +25,6 @@ class AuthService {
       password: password,
     );
     await cred.user?.updateDisplayName(name);
-    // Note: user doc login_screen mein LocalStorageService se create hoga
     return cred;
   }
 
@@ -40,7 +39,6 @@ class AuthService {
       idToken: googleAuth.idToken,
     );
     final cred = await _auth.signInWithCredential(credential);
-    // Note: user doc login_screen mein LocalStorageService se create hoga
     return cred;
   }
 
